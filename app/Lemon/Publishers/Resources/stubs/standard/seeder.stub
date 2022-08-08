@@ -1,0 +1,19 @@
+<?php
+namespace App\packages\$PLURALNAME$\seeders;
+
+use App\Packages\$PLURALNAME$\Models\$NAME$;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class $PLURALNAME$eeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $NAME$::factory()->count(10)->create();
+    }
+}

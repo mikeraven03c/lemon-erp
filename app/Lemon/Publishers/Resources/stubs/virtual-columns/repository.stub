@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Packages\$PLURALNAME$\Repository;
+
+use App\Packages\$PLURALNAME$\Models\$NAME$;
+use App\Packages\$PLURALNAME$\Contracts\$NAME$Contract;
+use App\Packages\$PLURALNAME$\Requests\$NAME$FormRequest;
+
+class $NAME$Repository implements $NAME$Contract
+{
+    public function store($NAME$FormRequest $request) : $NAME$
+    {
+        return $NAME$::create($request->toArray());
+    }
+
+    public function update($NAME$ $$LCNAME$, $NAME$FormRequest $request) : $NAME$
+    {
+        $$LCNAME$->update($request->toArray());
+        return $$LCNAME$;
+    }
+
+    public function delete(array $ids) {
+        return $NAME$::destroy($ids);
+    }
+}

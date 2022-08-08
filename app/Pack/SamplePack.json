@@ -1,0 +1,13 @@
+{
+  "name": "Sample",
+  "target_column": "name",
+  "columns": [
+    "name:string:nullable",
+    "email:string:unique",
+    "description:string:nullable",
+    "location:string:nullable"
+  ],
+  "has_virtual_column": 0,
+  "bind": 0,
+  "migration": 0
+}

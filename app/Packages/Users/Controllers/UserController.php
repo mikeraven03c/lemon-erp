@@ -44,7 +44,6 @@ class UserController
                 'exception' => $e->getMessage()
             ];
         }
-
     }
 
     /**

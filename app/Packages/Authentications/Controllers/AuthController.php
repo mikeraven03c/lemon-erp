@@ -5,7 +5,6 @@ namespace App\Packages\Authentications\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Packages\Users\Models\User;
-use Illuminate\Validation\Validator;
 
 class AuthController
 {
@@ -28,12 +27,15 @@ class AuthController
 
     public function login(Request $request)
     {
-        $email = $request->email;
+        $username = $request->username;
         $password = $request->password;
-        $attempt = Auth::attempt(['email' => $email, 'password' => $password]);
+        $attempt = Auth::attempt(['email' => $username, 'password' => $password]);
         if ($attempt) {
             $user = Auth::user();
-
+            return response()->json([
+                'success' => true,
+                'message' => 'login successfully'
+            ]);
         } else {
             return $this->sendError('The provided credentials do not match our records.');
         }
@@ -60,5 +62,12 @@ class AuthController
             $response['data'] = $errorMessages;
         }
         return response()->json($response, $code);
+    }
+
+    public function getAuth(Request $request)
+    {
+        $user = (env('APP_ENV') == 'local') ? User::first() : Auth::user();
+        $user = $user->only(['name', 'email', 'id']);
+        return compact('user');
     }
 }

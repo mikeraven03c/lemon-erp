@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4030aa81f4885cd4cfc7f630bbcc736b",
+    "content-hash": "a75a2c2effff351819f88a3dad227a93",
     "packages": [
         {
             "name": "brick/math",
@@ -4047,6 +4047,50 @@
             "time": "2022-06-28T14:29:26+00:00"
         },
         {
+            "name": "stancl/virtualcolumn",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/archtechx/virtualcolumn.git",
+                "reference": "dd3a77f17c9adc2078b0b7d36e5a798981049164"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/archtechx/virtualcolumn/zipball/dd3a77f17c9adc2078b0b7d36e5a798981049164",
+                "reference": "dd3a77f17c9adc2078b0b7d36e5a798981049164",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^6.0|^8.0|^9.0",
+                "illuminate/support": "^6.0|^8.0|^9.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stancl\\VirtualColumn\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Štancl",
+                    "email": "samuel.stancl@gmail.com"
+                }
+            ],
+            "description": "Eloquent virtual column.",
+            "support": {
+                "issues": "https://github.com/archtechx/virtualcolumn/issues",
+                "source": "https://github.com/archtechx/virtualcolumn/tree/v1.2.1"
+            },
+            "time": "2022-01-27T11:08:03+00:00"
+        },
+        {
             "name": "stella-maris/clock",
             "version": "0.1.4",
             "source": {
@@ -6860,6 +6904,64 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "laracasts/generators",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/Laravel-5-Generators-Extended.git",
+                "reference": "5527f50260c6d3bf50a8e62e902e3fb44e87c4d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/5527f50260c6d3bf50a8e62e902e3fb44e87c4d8",
+                "reference": "5527f50260c6d3bf50a8e62e902e3fb44e87c4d8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~6.0|~7.0|~8.0|~9.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracasts\\Generators\\GeneratorsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laracasts\\Generators\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                },
+                {
+                    "name": "Cristian Tabacitu",
+                    "email": "hello@tabaciu.ro"
+                }
+            ],
+            "description": "Advanced Laravel generators, that include schema information.",
+            "keywords": [
+                "generators",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laracasts/Laravel-5-Generators-Extended/issues",
+                "source": "https://github.com/laracasts/Laravel-5-Generators-Extended/tree/2.0.1"
+            },
+            "time": "2022-02-09T14:12:17+00:00"
         },
         {
             "name": "laravel/sail",

@@ -1,0 +1,9 @@
+{
+  "name": "$NAME$",
+  "target_column": "$MCOLUMN$",
+  "columns": [
+  ],
+  "has_virtual_column": 0,
+  "bind": 1,
+  "migration": 1
+}

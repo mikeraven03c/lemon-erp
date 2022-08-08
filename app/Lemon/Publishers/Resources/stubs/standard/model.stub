@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Packages\$PLURALNAME$\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class $NAME$ extends Model
+{
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [# COLUMNS #
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+    ];
+
+    protected static function newFactory()
+    {
+        return \App\Packages\$PLURALNAME$\Factories\$NAME$Factory::new();
+    }
+}

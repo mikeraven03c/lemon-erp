@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Packages\$PLURALNAME$\Contracts;
+
+use App\Packages\$PLURALNAME$\Models\$NAME$;
+use App\Packages\$PLURALNAME$\DataTransferObjects\Create$NAME$Data;
+use App\Packages\$PLURALNAME$\DataTransferObjects\Update$NAME$Data;
+
+interface $NAME$Contract
+{
+    public function store(Create$NAME$Data $dto);
+    public function update($NAME$ $$LCNAME$, Update$NAME$Data $dto);
+    public function delete(array $ids);
+}

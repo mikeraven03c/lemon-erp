@@ -1,3 +1,37 @@
 QUASAR LARAVEL
 
 https://lalrinfela.medium.com/laravel-with-quasar-spa-7b298024f106
+
+Yarn Install
+
+yarn install --ignore-engines
+
+
+Append Array file
+https://stackoverflow.com/questions/60290358/how-to-append-content-to-an-array-in-a-php-file
+
+
+Read Json File
+https://stackoverflow.com/questions/35374699/laravel5-json-get-file-contents
+
+Install Laravel Mix
+
+Make:generator
+https://github.com/laracasts/Laravel-5-Generators-Extended
+
+Fly System
+https://flysystem.thephpleague.com/docs/usage/filesystem-api/
+
+Read from Array
+https://stackoverflow.com/questions/52982727/best-practices-for-read-array-from-file-in-laravel
+https://www.codecheef.org/article/read-json-file-and-create-seeder-in-laravel
+
+sanctum laravel + quasar
+https://www.youtube.com/watch?v=G2fnlWaJNFE
+
+sprint_f
+https://www.w3schools.com/php/func_string_sprintf.asp
+https://github.com/laracasts/Laravel-5-Generators-Extended/blob/master/src/Migrations/SyntaxBuilder.php
+
+first word
+https://www.skillsugar.com/php-get-substring-before-space-or-any-other-character#:~:text=The%20PHP%20strstr()%20Function,-Another%20clean%20way&text=The%20default%20behaviour%20of%20this,a%20character%20will%20be%20returned.

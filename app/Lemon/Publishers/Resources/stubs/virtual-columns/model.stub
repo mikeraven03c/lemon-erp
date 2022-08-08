@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Packages\$PLURALNAME$\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Stancl\VirtualColumn\VirtualColumn;
+
+class $NAME$ extends Model
+{
+    use VirtualColumn;
+
+    public $guarded = [];
+
+    public static function getCustomColumns(): array
+    {
+        return [
+            'id',# COLUMNS #
+        ];
+    }
+
+    protected $hidden = [
+    ];
+
+    protected static function newFactory()
+    {
+        return \App\Packages\$PLURALNAME$\Factories\$NAME$Factory::new();
+    }
+}

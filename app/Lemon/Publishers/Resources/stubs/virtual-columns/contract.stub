@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Packages\$PLURALNAME$\Contracts;
+
+use App\Packages\$PLURALNAME$\Models\$NAME$;
+use App\Packages\$PLURALNAME$\Requests\$NAME$FormRequest;
+
+interface $NAME$Contract
+{
+    public function store($NAME$FormRequest $request);
+    public function update($NAME$ $$LCNAME$, $NAME$FormRequest $dto);
+    public function delete(array $ids);
+}

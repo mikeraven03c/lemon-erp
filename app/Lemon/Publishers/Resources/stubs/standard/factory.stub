@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Packages\$PLURALNAME$\Factories;
+
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class $NAME$Factory extends Factory
+{
+    protected $model = \App\Packages\$PLURALNAME$\Models\$NAME$::class;
+
+    public function definition()
+    {
+        return [# COLUMNS #
+        ];
+    }
+}

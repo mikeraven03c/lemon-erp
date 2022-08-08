@@ -12,15 +12,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('{any}', function () {
+Route::get('/', function() {
     return view('app');
-})->where('any','.*');
+})->name('login');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/logout', [
+    \App\Packages\Authentications\Controllers\AuthController::class,
+    'logout'
+]);
+
+Route::post('/login', [
+    \App\Packages\Authentications\Controllers\AuthController::class,
+    'login'
+]);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/test', function () {
+        return view('app');
+    });
+    Route::get('{any}', function () {
+        return view('app');
+    })->where('any','.*');
 });
 
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('{any}', function () {
+//     abort(404);
+// })->where('any','.*');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
