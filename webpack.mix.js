@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const {readFile, writeFile, promises: fsPromises} = require('fs');
 
 /*
  |--------------------------------------------------------------------------
@@ -17,4 +18,19 @@ const mix = require('laravel-mix');
 
 mix
 .copy('ui/dist/spa/index.html', 'resources/views/app.blade.php')
-.copyDirectory('ui/dist/spa', 'public');
+.copyDirectory('ui/dist/spa', 'public').after(webpackStats=> {
+  console.log('reading files')
+  readFile('resources/views/app.blade.php', 'utf-8', function (err, contents) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    const csrfFile = '<head><meta name="csrf-token" content="{{ csrf_token() }}">'
+    const replaced = contents.replace(/<head>/g,  csrfFile);
+
+    writeFile('resources/views/app.blade.php', replaced, 'utf-8', function (err) {
+      console.log(err);
+    });
+  });
+});

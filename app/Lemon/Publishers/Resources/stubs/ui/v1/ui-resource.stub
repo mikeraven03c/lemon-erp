@@ -1,0 +1,146 @@
+<template>
+  <q-page>
+    <div class="q-pa-md">
+      <LTable
+        ref="table"
+        :title="title"
+        :columns="columns"
+        :table-data="tableData"
+        :visible-columns="[]"
+        :loading="loading"
+        :dense="false"
+      >
+        <template v-slot:header>
+          <l-header-action
+            hide-export
+            @onAdd="openModal('add')"
+            @onGet="getTableData"
+            @onDelete="onDelete"
+          ></l-header-action>
+        </template>
+        <template v-slot:table-menu>
+          <l-table-menu
+            @onShow="openModal('show', table.selected[0])"
+            @onEdit="openModal('edit', table.selected[0])"
+            @onDelete="onDelete"
+          ></l-table-menu>
+        </template>
+      </LTable>
+    </div>
+    <LForm
+      :title="title"
+      @onOpen="
+        ({ selected }) => {
+          formData = selected;
+        }
+      "
+      @onSubmit="onSubmit"
+      :loading="loading"
+      ref="form"
+    >
+      <template v-slot:form>
+        <form-builder
+          :data="formData"
+          ref="builder"
+          :columns="columns"
+        ></form-builder>
+      </template>
+    </LForm>
+  </q-page>
+</template>
+
+<script>
+import columns from "./js/columns";
+import { title, endpoint } from "./js/config";
+import { openModal as open } from "src/lemon/actions/formPage/OpenModal.js";
+import { getFormData } from "src/lemon/actions/formPage/GetFormData.js";
+import { saveForm } from "src/lemon/actions/formPage/SaveForm.js";
+import { getData } from "src/lemon/actions/indexPage/GetData";
+import { deleteData } from "src/lemon/actions/indexPage/DeleteData";
+import { updateTableData } from "src/lemon/actions/indexPage/UpdateTableData";
+import { defineAsyncComponent, onMounted, ref } from "vue";
+export default {
+  methods: {},
+  components: {
+    LTable: defineAsyncComponent(() =>
+      import("src/lemon/components/indexPage/TableComponent.vue")
+    ),
+    LHeaderAction: defineAsyncComponent(() =>
+      import("src/lemon/components/indexPage/HeaderActionComponent.vue")
+    ),
+    LTableMenu: defineAsyncComponent(() =>
+      import("src/lemon/components/indexPage/TableMenuComponent.vue")
+    ),
+    LForm: defineAsyncComponent(() =>
+      import("src/lemon/components/formPage/FormComponent.vue")
+    ),
+    FormBuilder: defineAsyncComponent(() =>
+      import("src/lemon/components/formPage/FormBuilder.vue")
+    ),
+  },
+  setup() {
+    const loading = ref(false);
+    const tableData = ref([]);
+    const table = ref();
+    const form = ref();
+    const builder = ref();
+
+    const { formData, formError, formMode } = getFormData();
+
+    const getTableData = () => {
+      getData(endpoint, {
+        loading,
+        tableData,
+      });
+    };
+
+    const openModal = (mode, selected = {}) => {
+      open(form, mode, selected, {
+        formMode,
+        formData,
+        formError,
+      });
+    };
+
+    const onSubmit = () => {
+      saveForm(endpoint, {
+        formMode,
+        formData,
+        formError,
+        loading,
+        onSave({ mode, data }) {
+          form.value.closeModal();
+          updateTableData(mode, data.data, { tableData });
+        },
+        onFormError(error) {
+          builder.value.setFormError(error);
+        },
+      });
+    };
+
+    const onDelete = () => {
+      deleteData(table.value.getSelectedIds(), { tableData, loading });
+    };
+
+    onMounted(() => {
+      getTableData();
+    });
+
+    return {
+      title,
+      builder,
+      onDelete,
+      formData,
+      formError,
+      onSubmit,
+      getTableData,
+      table,
+      form,
+      columns,
+      openModal,
+      tableData,
+      loading,
+    };
+  },
+};
+</script>

@@ -3,7 +3,7 @@
     "scripts": {
         "spa-build": "cd ui && git pull origin master && yarn build && cd ..&& npm run development",
         "erp-init": "cd ui && npm install && yarn build && cd .. && npm run development",
-        "build": "cd ui && yarn build && cd .. && npm run development",
+        "build": "cd ui && yarn build && cd .. && npm run development && npm run postinstall",
         "env": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "env-prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
         "erp-test": "cd ui && npm install && yarn build && cp -r dist/spa ../public development",
@@ -15,7 +15,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "postinstall": "node postinstall.js"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",

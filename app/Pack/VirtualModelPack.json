@@ -1,0 +1,9 @@
+{
+  "name": "VirtualModel",
+  "target_column": "name",
+  "columns": [
+  ],
+  "has_virtual_column": 1,
+  "bind": 1,
+  "migration": 1
+}

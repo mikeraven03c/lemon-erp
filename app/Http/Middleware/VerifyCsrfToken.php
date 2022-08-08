@@ -14,6 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         // add your host file
         // $this->centralUrl()
-        'http://michael-erp.test/login'
+        // 'http://michael-erp.test/login'
     ];
 }
