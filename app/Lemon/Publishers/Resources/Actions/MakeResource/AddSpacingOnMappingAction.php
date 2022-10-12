@@ -10,12 +10,17 @@ class AddSpacingOnMappingAction
     {
         if (
             in_array($type, ['request', 'resource', 'factory', 'dtoRequest'])
-            || $mode == FileResources::VIRTUAL_COLUMNS
+            || ($mode == FileResources::VIRTUAL_COLUMNS && $type == 'model')
         ) {
             $spacing = 12;
+        } else if ($type == 'config-js')
+        {
+            $spacing = 0;
+        } else if ($type == 'ui-columns') {
+            $spacing = 2;
         }
 
-        return array_map(function ($map) use ($spacing) {
+        return $spacing == 0 ? $columns : array_map(function ($map) use ($spacing) {
             return str_repeat(" ", $spacing) . $map;
         }, $columns);
     }

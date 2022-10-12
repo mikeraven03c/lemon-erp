@@ -1,0 +1,14 @@
+{
+  "name": "VirtualType",
+  "target_column": "name",
+  "columns": [
+  ],
+  "has_virtual_column": 0,
+  "bind": 1,
+  "migration": 1,
+  "ui": 1,
+  "ui_bind": 1,
+  "ui_menu_bind": 0,
+  "virtual_columns": [
+  ]
+}

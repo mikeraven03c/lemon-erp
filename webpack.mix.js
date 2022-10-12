@@ -17,6 +17,7 @@ const {readFile, writeFile, promises: fsPromises} = require('fs');
 //     .sass('resources/sass/app.scss', 'public/css');
 
 mix
+.sass('resources/sass/app.scss', 'public/css')
 .copy('ui/dist/spa/index.html', 'resources/views/app.blade.php')
 .copyDirectory('ui/dist/spa', 'public').after(webpackStats=> {
   console.log('reading files')

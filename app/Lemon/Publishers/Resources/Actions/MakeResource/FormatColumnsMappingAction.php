@@ -2,9 +2,11 @@
 
 namespace App\Lemon\Publishers\Resources\Actions\MakeResource;
 
+use App\Lemon\Publishers\Resources\Actions\MakeResource\Formats\UIFormatMappingAction;
+
 class FormatColumnsMappingAction
 {
-    public function __invoke(string $tbName, string $type, array $columns)
+    public function __invoke(string $tbName, string $type, array $columns, array $fileResource = [])
     {
         $format = [];
         foreach ($columns as $column) {
@@ -24,6 +26,10 @@ class FormatColumnsMappingAction
                 case 'dtoRequest':
                     $format[] = $this->dtoRequestFormat($column);
                     break;
+                case 'config-js':
+                    $format[] = (new UIFormatMappingAction)($column, $fileResource);
+                    break;
+                case 'default':
                 default:
                     $format[] = "'" . $column[0] . "',";
             }
@@ -109,7 +115,6 @@ class FormatColumnsMappingAction
 
     public function factoryFormat(array $field)
     {
-
         $name = $field[0];
         $type = $this->factoryType($field[0], $field[1]);
 

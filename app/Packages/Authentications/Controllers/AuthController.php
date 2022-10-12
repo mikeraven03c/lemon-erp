@@ -5,6 +5,9 @@ namespace App\Packages\Authentications\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Packages\Users\Models\User;
+use App\Packages\VirtualModels\Contracts\VirtualResourceContract;
+use App\Packages\VirtualModels\Repositories\VirtualResourceRepository;
+use App\Packages\VirtualModels\Resources\VirtualResourceResource;
 
 class AuthController
 {
@@ -64,10 +67,17 @@ class AuthController
         return response()->json($response, $code);
     }
 
-    public function getAuth(Request $request)
+    public function getAuth(
+        Request $request,
+        VirtualResourceContract $resource
+    )
     {
         $user = (env('APP_ENV') == 'local') ? User::first() : Auth::user();
+        // $user = Auth::user();
+
         $user = $user->only(['name', 'email', 'id']);
-        return compact('user');
+
+        $resources = VirtualResourceResource::collection($resource->getMenu());
+        return compact('user', 'resources');
     }
 }

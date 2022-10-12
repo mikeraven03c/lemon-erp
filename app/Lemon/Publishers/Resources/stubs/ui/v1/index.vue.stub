@@ -6,7 +6,7 @@
         :title="title"
         :columns="columns"
         :table-data="tableData"
-        :visible-columns="[]"
+        :visible-columns="visibleColumns"
         :loading="loading"
         :dense="false"
       >
@@ -30,7 +30,7 @@
     <LForm
       :title="title"
       @onOpen="
-        ({ selected }) => {
+        ( selected ) => {
           formData = selected;
         }
       "
@@ -50,8 +50,7 @@
 </template>
 
 <script>
-import columns from "./js/columns";
-import { title, endpoint } from "./js/config";
+import { title, endpoint, columns, visibleColumns } from "./js/config";
 import { openModal as open } from "src/lemon/actions/formPage/OpenModal.js";
 import { getFormData } from "src/lemon/actions/formPage/GetFormData.js";
 import { saveForm } from "src/lemon/actions/formPage/SaveForm.js";
@@ -119,7 +118,7 @@ export default {
     };
 
     const onDelete = () => {
-      deleteData(table.value.getSelectedIds(), { tableData, loading });
+      deleteData(endpoint + '/delete', table.value.getSelectedIds(), { tableData, loading });
     };
 
     onMounted(() => {
@@ -127,6 +126,7 @@ export default {
     });
 
     return {
+      visibleColumns,
       title,
       builder,
       onDelete,

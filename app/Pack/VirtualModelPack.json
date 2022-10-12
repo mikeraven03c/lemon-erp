@@ -2,8 +2,16 @@
   "name": "VirtualModel",
   "target_column": "name",
   "columns": [
+    "name:string",
+    "table_name:string",
+    "virtual_group_id:unsignedBigInteger:foreign:nullable"
   ],
   "has_virtual_column": 1,
   "bind": 1,
-  "migration": 1
+  "migration": 1,
+  "ui": 1,
+  "ui_bind": 1,
+  "ui_menu_bind": 1,
+  "virtual_columns": [
+  ]
 }

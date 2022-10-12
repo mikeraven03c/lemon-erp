@@ -9,7 +9,9 @@ class TestDevelopment
   public function handle($request, Closure $next)
   {
     if (env('APP_ENV', 'local') == 'local') {
-        Auth::login(User::first());
+        if (!AUTH::check()) {
+          Auth::login(User::first());
+        }
     }
     return $next($request);
   }

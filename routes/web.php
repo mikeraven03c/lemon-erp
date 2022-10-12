@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function() {
-    return view('app');
+    return view('pages.onboarding');
 });
 
 Route::get('/login', function() {
-    return view('app');
+    return view('pages.login');
 })->name('login');
 
 Route::get('/logout', [

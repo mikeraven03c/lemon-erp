@@ -62,18 +62,25 @@ class MakeResourceAction
         $folder = $fileResource['folder'];
         $suffix = $fileResource['suffix'];
         $prefix = $fileResource['prefix'];
+        $fileName = $fileResource['file_name'] ?? '';
         $type = $fileResource['type'];
 
         $this->setAbsolutePath($fileResource);
 
-        $path = $this->getSourceFilePath($folder, $suffix, $prefix);
+        $path = $this->getSourceFilePath(
+            $folder,
+            $suffix,
+            $prefix,
+            $fileName
+        );
 
         $this->makeDirectory(dirname($path));
 
         $contents = $this->getStubContents(
             $type,
             $this->getStubPath($fileResource['stub']),
-            $this->getVariableResources($this->options)
+            $this->getVariableResources($this->options),
+            $fileResource
         );
 
         if (!$this->files->exists($path)) {
@@ -90,6 +97,14 @@ class MakeResourceAction
         $files = $this->getFileResources($type);
         foreach ($files as $file) {
             $status = $this->run($file);
+            $command->info($status);
+        }
+    }
+
+    public function customResources(array $resources, $command)
+    {
+        foreach ($resources as $resource) {
+            $status = $this->run($resource);
             $command->info($status);
         }
     }
@@ -178,11 +193,13 @@ class MakeResourceAction
         return $this->options['columns'];
     }
 
-    public function getSourceFilePath($folder, $suffix = '', $prefix = '')
+    public function getSourceFilePath($folder, $suffix = '', $prefix = '', $file = '')
     {
-        $fileName = $prefix
-            . $this->name
-            . $suffix;
+        $fileName = empty($file)
+            ? $prefix
+                . $this->name
+                . $suffix
+            : $file;
         $path = $this->absolutePath
             ? $this->absolutePath . '\\' . $fileName
             : $this->basePath
@@ -190,8 +207,6 @@ class MakeResourceAction
                 . $this->pluralName
                 . "\\{$folder}\\"
                 . $fileName;
-
-        logger(['path' => $path, 'absolutePath' => $this->absolutePath]);
 
         return $path;
     }
@@ -205,7 +220,7 @@ class MakeResourceAction
         return $path;
     }
 
-    public function getStubContents($type, $stub, $stubVariables = [])
+    public function getStubContents($type, $stub, $stubVariables = [], $fileResource = [])
     {
         $contents = file_get_contents($stub);
 
@@ -213,11 +228,18 @@ class MakeResourceAction
             $contents = str_replace('$' . $search . '$', $replace, $contents);
         }
 
+        if (isset($fileResource['customVariable'])) {
+            foreach($fileResource['customVariable'] as $search => $replace) {
+                $contents = str_replace('$' . $search . '$', $replace, $contents);
+            }
+        }
+
         if ($this->hasColumns()) {
             $columns = (new FormatColumnsMappingAction)(
                 $this->tbName,
                 $type,
-                $this->columnConf
+                $this->columnConf,
+                $fileResource
             );
 
             $columns = (new AddSpacingOnMappingAction)(
@@ -229,17 +251,17 @@ class MakeResourceAction
                 $type
             );
 
-            if ($type == 'dto') {
+            if ($type == 'dto' || $type == 'config-js') {
                 $columnsDTO = (new FormatColumnsMappingAction)(
                     $this->tbName,
-                    'dtoRequest',
+                    $type == 'dto' ? 'dtoRequest' : 'default',
                     $this->columnConf
                 );
 
                 $columnsDTO = (new AddSpacingOnMappingAction)(
                     FileResources::STANDARD,
                     $columnsDTO,
-                    'dtoRequest'
+                    $type == 'dto' ? 'dtoRequest' : 'ui-columns'
                 );
 
                 $contents = $this->mapColumns($contents, $columnsDTO, '# COLUMNS2 #');

@@ -11,6 +11,8 @@ class VariableResource
     const PLURALNAME = 'PLURALNAME';
     const LCNAME = 'LCNAME';
     const MCOLUMN = 'MCOLUMN';
+    const KEBABNAME = 'KEBABNAME';
+    const LABELNAME = 'LABELNAME';
 
     public function __invoke($options) : Collection
     {
@@ -20,7 +22,9 @@ class VariableResource
             self::NAME => ucwords($name),
             self::PLURALNAME => ucwords(Str::plural($name)),
             self::LCNAME => strtolower($name),
-            self::MCOLUMN => $column
+            self::MCOLUMN => $column,
+            self::KEBABNAME => Str::kebab($name),
+            self::LABELNAME => ucwords(Str::snake($name, ' '))
         ]);
     }
 }

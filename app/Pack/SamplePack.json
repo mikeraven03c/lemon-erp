@@ -3,11 +3,18 @@
   "target_column": "name",
   "columns": [
     "name:string:nullable",
+    "number:integer:nullable",
     "email:string:unique",
     "description:string:nullable",
     "location:string:nullable"
   ],
-  "has_virtual_column": 0,
+  "has_virtual_column": 1,
   "bind": 0,
-  "migration": 0
+  "migration": 0,
+  "ui": 1,
+  "ui_bind": 1,
+  "ui_menu_bind": 1,
+  "virtual_columns": [
+    "text:string"
+  ]
 }

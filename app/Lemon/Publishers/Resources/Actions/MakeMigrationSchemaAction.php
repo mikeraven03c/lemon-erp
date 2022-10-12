@@ -9,6 +9,7 @@ class MakeMigrationSchemaAction
 {
     public function __invoke($pack)
     {
+        $columns = $pack->columns;
         if ($pack->has_virtual_column) {
             $columns[] = 'data:json:nullable';
         }
